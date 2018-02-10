@@ -12,7 +12,7 @@ ReactDOM.render(
     <Router>
         <Switch>
             <Route exact path="/" component={App} />
-            <Route path="/game" component={Game} />
+            <Route path="/game/:grid_size" component={Game} />
         </Switch>
     </Router>
     , document.getElementById('root'));

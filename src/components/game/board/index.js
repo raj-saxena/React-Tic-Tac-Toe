@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash';
+
 import Cell from './cell';
 
 class Board extends Component {
     render(props) {
         console.log("grid_size", this.props.grid_size);
-        // Iterate for each row
-            // Iterate for each column
-                // Add cell for every position.
-
-        // Create an empty array to loop N x N times
-        var dummy_array = Array.apply(null, Array(this.props.grid_size));
+        
+        const rows = _.range(0, this.props.grid_size);
+        const columns = _.range(0, this.props.grid_size);
         return (
             <div className="board">
                 <table><tbody>
-                    {
-                      dummy_array.map((value, row_index) => {
+                    {// Iterate for each row
+                      rows.map((value, row_index) => {
                         return (
                             <tr key={row_index}>
-                                {
-                                  dummy_array.map((value, column_index) => {
+                                {// Iterate for each column
+                                  columns.map((value, column_index) => {
+                                    // Add cell for every position.
                                     return (
                                         <td key={column_index}>
                                             <Cell row={row_index} column={column_index} />

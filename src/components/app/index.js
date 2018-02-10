@@ -17,17 +17,16 @@ class App extends Component {
 
   handleSubmit(event) {
     event.preventDefault(); 
-
-    const { gridElement, playerSymbol, compSymbol } = this.refs;
+    const { gridSize, playerSymbol, compSymbol } = this.refs;
     const validationResult = playerSymbol.value === compSymbol.value;
-    console.log('result', gridElement.value, playerSymbol.value, compSymbol.value, validationResult);
+    console.log('result', gridSize.value, playerSymbol.value, compSymbol.value, validationResult);
 
     if(validationResult) {
       const error = "The symbols cannot be same.";
       this.setState({error})
       return;
     }
-    this.props.history.push('/game');
+    this.props.history.push('/game/'+ gridSize.value);
   }
 
   render() {
@@ -37,14 +36,14 @@ class App extends Component {
         <div className="boardsize">
           <form onSubmit={this.handleSubmit}>
             <label className="button button1">
-              <select ref="gridElement" className="styled-select green rounded" defaultValue="3">
+              <select ref="gridSize" className="styled-select green rounded" defaultValue="3">
                 { this.getOptions(3, 10) }
               </select>
             </label>
             <input ref="playerSymbol" type="text" className="symbol" placeholder="Your Symbol" />
             <input ref="compSymbol" type="text" className="symbol" placeholder="Opponent symbol"/>
             {this.state.error}
-            <input type="submit" value="Submit" onSubmit={this.handleSubmit} />
+            <input type="submit" value="Play"/>
           </form>
         </div>
       </div>
