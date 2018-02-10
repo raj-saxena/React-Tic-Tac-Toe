@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-import routes from './routes';
+import App from './components/app';
+import './index.css';
 
 ReactDOM.render(
-<Router>
-    {routes}
-</Router>, 
-    document.getElementById('root'));
+    <Router>
+        <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/game" render={() => <h1>Hello Game</h1>} />
+        </Switch>
+    </Router>
+    , document.getElementById('root'));
 
 registerServiceWorker();

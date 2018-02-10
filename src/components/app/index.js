@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+
+import _ from 'lodash';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      gridsize: '3',
       user_symbol: '',
       computer_symbol: '',
       error: '',
@@ -25,9 +27,8 @@ class App extends Component {
       this.setState({error})
       return;
     }
+    this.props.history.push('/game');
   }
-
- 
 
   render() {
     return (
@@ -36,15 +37,8 @@ class App extends Component {
         <div className="boardsize">
           <form onSubmit={this.handleSubmit}>
             <label className="button button1">
-              <select ref="gridElement" className="styled-select green rounded" defaultValue={this.state.gridsize}>
-                <option value="3">3 X 3</option>
-                <option value="4">4 X 4</option>
-                <option value="5">5 X 5</option>
-                <option value="6">6 X 6</option>
-                <option value="7">7 X 7</option>
-                <option value="8">8 X 8</option>
-                <option value="9">9 X 9</option>
-                <option value="10">10 X 10</option>
+              <select ref="gridElement" className="styled-select green rounded" defaultValue="3">
+                { this.getOptions(3, 10) }
               </select>
             </label>
             <input ref="playerSymbol" type="text" className="symbol" placeholder="Your Symbol" />
@@ -56,7 +50,12 @@ class App extends Component {
       </div>
     );
   }
+
+getOptions(start, end) {
+    const items = _.range(start, end + 1);
+    return _.map(items, (i) => <option value={i} key={i}> {i} x {i} </option>);
+  }
 }
 
-export default App;
+export default withRouter(App);
 
